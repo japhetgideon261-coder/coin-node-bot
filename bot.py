@@ -1,4 +1,5 @@
 import os
+import requests
 from telegram import Update, ReplyKeyboardMarkup
 from telegram.ext import ApplicationBuilder, CommandHandler, MessageHandler, filters, ContextTypes
 
@@ -22,7 +23,20 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
     text = update.message.text
 
     if text == "📊 Prices":
-        await update.message.reply_text("📊 BTC: $65,000")
+    url = "https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,tether&vs_currencies=usd"
+    
+    data = requests.get(url).json()
+
+    btc = data["bitcoin"]["usd"]
+    eth = data["ethereum"]["usd"]
+    usdt = data["tether"]["usd"]
+
+    await update.message.reply_text(
+        f"📊 COIN NODE Live Prices\n\n"
+        f"BTC: ${btc}\n"
+        f"ETH: ${eth}\n"
+        f"USDT: ${usdt}"
+    )
 
     elif text == "📈 Signals":
         await update.message.reply_text("📈 BTC/USDT BUY\nTP: 67,500\nSL: 63,500")
