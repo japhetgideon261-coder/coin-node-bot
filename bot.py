@@ -24,21 +24,21 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
     if text == "📊 Prices":
         url = "https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,tether&vs_currencies=usd"
-    
+        
         data = requests.get(url).json()
 
         btc = data["bitcoin"]["usd"]
         eth = data["ethereum"]["usd"]
         usdt = data["tether"]["usd"]
 
-    message = (
-        f"📊 COIN NODE Live Prices\n\n"
-        f"BTC: ${btc}\n"
-        f"ETH: ${eth}\n"
-        f"USDT: ${usdt}"
-    )
+        message = (
+            f"📊 COIN NODE Live Prices\n\n"
+            f"BTC: ${btc}\n"
+            f"ETH: ${eth}\n"
+            f"USDT: ${usdt}"
+        )
 
-    await update.message.reply_text(message)
+        await update.message.reply_text(message)
 
     elif text == "📈 Signals":
         await update.message.reply_text("📈 BTC/USDT BUY\nTP: 67,500\nSL: 63,500")
@@ -51,7 +51,6 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
     elif text == "📞 Support":
         await update.message.reply_text("Contact support on Telegram")
-
 app = ApplicationBuilder().token(TOKEN).build()
 
 app.add_handler(CommandHandler("start", start))
