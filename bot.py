@@ -23,13 +23,13 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
     text = update.message.text
 
     if text == "📊 Prices":
-    url = "https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,tether&vs_currencies=usd"
+        url = "https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,tether&vs_currencies=usd"
     
-    data = requests.get(url).json()
+        data = requests.get(url).json()
 
-    btc = data["bitcoin"]["usd"]
-    eth = data["ethereum"]["usd"]
-    usdt = data["tether"]["usd"]
+        btc = data["bitcoin"]["usd"]
+        eth = data["ethereum"]["usd"]
+        usdt = data["tether"]["usd"]
 
     await update.message.reply_text(
         f"📊 COIN NODE Live Prices\n\n"
