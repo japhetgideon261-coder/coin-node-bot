@@ -31,12 +31,14 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
         eth = data["ethereum"]["usd"]
         usdt = data["tether"]["usd"]
 
-    await update.message.reply_text(
+    message = (
         f"📊 COIN NODE Live Prices\n\n"
         f"BTC: ${btc}\n"
         f"ETH: ${eth}\n"
         f"USDT: ${usdt}"
     )
+
+    await update.message.reply_text(message)
 
     elif text == "📈 Signals":
         await update.message.reply_text("📈 BTC/USDT BUY\nTP: 67,500\nSL: 63,500")
